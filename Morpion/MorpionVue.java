@@ -4,28 +4,96 @@
  */
 
 /*
- * MorpionVue.java
+ * OrpionVue.java
  *
- * Created on 27 sept. 2010, 09:45:40
+ * Created on 4 oct. 2010, 10:24:22
  */
 
+package doodlegames;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 /**
  *
- * @author sebilleg
+ * @author somet
  */
 public class MorpionVue extends javax.swing.JPanel {
-
-    Morpion Mor;
-
-    /** Creates new form MorpionVue */
+    MorpionModele mod = new MorpionModele();
+    /** Creates new form OrpionVue */
     public MorpionVue() {
-        Mor = new Morpion();
         initComponents();
+       // this.go();
     }
+
+
+
+    /*public void jouerCoup(int x , int y , int joueur){
+        if(this.mod.getCase(x,y) == 0){
+            this.mod.fillCase(x,y);
+            return;
+        }
+
+        while(this.mod.getCase(x,y) != 0)
+        {
+            if(this.mod.getCase(x,y) == 0){
+            	this.mod.fillCase(x,y);
+                return;
+            }
+        }
+    }*/
+
+    public void afficher(){
+        for(int i = 0 ; i < 3 ; i++)
+        {
+               for(int j = 0 ; j < 3 ; j++)
+               {
+                   if(this.mod.getCase(i,j) == 1)
+                       System.out.print(" X ");
+                   else if(this.mod.getCase(i,j) == 2)
+                       System.out.print(" 0 ");
+                   else
+                       System.out.print(" _ ");
+
+                   if( j != 2 )
+                       System.out.print("|");
+               }
+            if( i != 2 )
+                System.out.print("\n---+---+---\n");
+        }
+        System.out.println("\n\n");
+    }
+
+    public void finDePartie(){
+       if((this.mod.getCase(0,0) != 0 && this.mod.getCase(0,0) == this.mod.getCase(0,1) && this.mod.getCase(0,1) == this.mod.getCase(0,2)) ||
+               (this.mod.getCase(1,0) != 0 && this.mod.getCase(1,0) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(1,2)) ||
+               (this.mod.getCase(2,0) != 0 && this.mod.getCase(2,0) == this.mod.getCase(2,1) && this.mod.getCase(2,1) == this.mod.getCase(2,2)) ||
+               (this.mod.getCase(0,0) != 0 && this.mod.getCase(0,0) == this.mod.getCase(1,0) && this.mod.getCase(1,0) == this.mod.getCase(2,0)) ||
+               (this.mod.getCase(0,1) != 0 && this.mod.getCase(0,1) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(2,1)) ||
+               (this.mod.getCase(0,2) != 0 && this.mod.getCase(0,2) == this.mod.getCase(1,2) && this.mod.getCase(1,2) == this.mod.getCase(2,2)) ||
+               (this.mod.getCase(0,0) != 0 && this.mod.getCase(0,0) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(2,2)) ||
+               (this.mod.getCase(0,2) != 0 && this.mod.getCase(0,2) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(2,0)))
+            System.out.println("Joueur 1 gagne!");
+        else if (this.mod.getCase(0,0) != 0 && this.mod.getCase(0,1) != 0 && this.mod.getCase(0,2) != 0 &&
+                 this.mod.getCase(1,0) != 0 && this.mod.getCase(1,1) != 0 && this.mod.getCase(1,2) != 0 &&
+                 this.mod.getCase(2,0) != 0 && this.mod.getCase(2,1) != 0 && this.mod.getCase(2,2) != 0 )
+            System.out.println("Joueur 2 gagne!");
+    }
+
+    /*public void go(){
+        int a , b , c = 0;
+        while(this.finDePartie() == 0){
+           a = (int)(100*Math.random())%3;
+           b = (int)(100*Math.random())%3;
+           c += 1;
+           this.jouerCoup(a, b, c);
+           c %= 2;
+           this.afficher();
+        }
+        if (this.finDePartie() == 1)
+            System.out.println("Bien joué !!!");
+        else
+            System.out.println("Dommage");
+    }*/
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -47,148 +115,239 @@ public class MorpionVue extends javax.swing.JPanel {
         jButton9 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(1, 1, 1));
-        setMaximumSize(new java.awt.Dimension(400, 300));
-        setMinimumSize(new java.awt.Dimension(400, 300));
-        setPreferredSize(new java.awt.Dimension(400, 300));
 
         jButton1.setBackground(new java.awt.Color(1, 1, 1));
-        jButton1.setForeground(new java.awt.Color(1, 1, 1));
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton1.setText("jButton1");
-        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton1.setBorderPainted(false);
-        jButton1.setMaximumSize(new java.awt.Dimension(133, 100));
-        jButton1.setMinimumSize(new java.awt.Dimension(133, 100));
-        jButton1.setPreferredSize(new java.awt.Dimension(133, 100));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton2.setText("jButton2");
-        jButton2.setBorder(null);
+        jButton2.setBackground(new java.awt.Color(1, 1, 1));
+        jButton2.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton2.setBorderPainted(false);
-        jButton2.setMaximumSize(new java.awt.Dimension(133, 100));
-        jButton2.setMinimumSize(new java.awt.Dimension(133, 100));
-        jButton2.setPreferredSize(new java.awt.Dimension(134, 100));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton3.setText("jButton3");
-        jButton3.setBorder(null);
+        jButton3.setBackground(new java.awt.Color(1, 1, 1));
+        jButton3.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton3.setBorderPainted(false);
-        jButton3.setMaximumSize(new java.awt.Dimension(133, 100));
-        jButton3.setMinimumSize(new java.awt.Dimension(133, 100));
-        jButton3.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton4.setText("jButton4");
-        jButton4.setBorder(null);
+        jButton4.setBackground(new java.awt.Color(1, 1, 1));
+        jButton4.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton4.setBorderPainted(false);
-        jButton4.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jButton5.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton5.setText("jButton5");
-        jButton5.setBorder(null);
+        jButton5.setBackground(new java.awt.Color(1, 1, 1));
+        jButton5.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton5.setBorderPainted(false);
-        jButton5.setPreferredSize(new java.awt.Dimension(134, 100));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jButton6.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton6.setText("jButton6");
-        jButton6.setBorder(null);
+        jButton6.setBackground(new java.awt.Color(1, 1, 1));
+        jButton6.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton6.setBorderPainted(false);
-        jButton6.setMaximumSize(new java.awt.Dimension(133, 100));
-        jButton6.setMinimumSize(new java.awt.Dimension(133, 100));
-        jButton6.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton7.setText("jButton7");
+        jButton7.setBackground(new java.awt.Color(1, 1, 1));
+        jButton7.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton7.setBorderPainted(false);
-        jButton7.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
-        jButton8.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton8.setText("jButton8");
+        jButton8.setBackground(new java.awt.Color(1, 1, 1));
+        jButton8.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton8.setBorderPainted(false);
-        jButton8.setPreferredSize(new java.awt.Dimension(134, 100));
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jButton9.setIcon(new javax.swing.ImageIcon("/home/infoetu/chapotat/Images/vide.jpg")); // NOI18N
-        jButton9.setText("jButton9");
+        jButton9.setBackground(new java.awt.Color(1, 1, 1));
+        jButton9.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton9.setBorderPainted(false);
-        jButton9.setPreferredSize(new java.awt.Dimension(133, 100));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton4)
+                        .addComponent(jButton1))
+                    .addComponent(jButton7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton6)
+                            .addComponent(jButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton9)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9)
+                    .addComponent(jButton8)
+                    .addComponent(jButton7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        jButton1.setBackground(new java.awt.Color(1,1,1));
-        if(Mor.cKiKiJoue) {
-            if(Mor.plateau[0][0] != 0) {
-                jButton1.setIcon(new ImageIcon("/home/infoetu/chapotat/Images/croix.jpg"));
-                Mor.cKiKiJoue = !Mor.cKiKiJoue;
-                Mor.plateau[0][0] = 1;
-            }else{
-                   System.out.println("LOOL, t'as cru !");
-            }
-            
-        }else{
-            if(Mor.plateau[0][0] != 0) {
-                 jButton1.setIcon(new ImageIcon("/home/infoetu/chapotat/Images/rond.jpg"));
-                 Mor.cKiKiJoue = !Mor.cKiKiJoue;
-                 Mor.plateau[0][0] = 1;
-            }else{
-                   System.out.println("LOOL, t'as cru !");
-            }
-        }
+        this.mod.fillCase(0, 0);
+        System.out.println(this.mod.getCase(0, 0));
+        if(this.mod.getCase(0, 0) == 1)
+            jButton1.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(0, 0) == 2)
+            jButton1.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton1.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.mod.fillCase(0, 1);
+        if(this.mod.getCase(0, 1) == 1)
+            jButton2.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(0, 1) == 2)
+            jButton2.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton2.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.mod.fillCase(0, 2);
+        if(this.mod.getCase(0, 2) == 1)
+            jButton3.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(0, 2) == 2)
+            jButton3.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton3.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.mod.fillCase(1, 0);
+        if(this.mod.getCase(1, 0) == 1)
+            jButton4.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(1, 0) == 2)
+            jButton4.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton4.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.mod.fillCase(1, 1);
+        if(this.mod.getCase(1, 1) == 1)
+            jButton5.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(1, 1) == 2)
+            jButton5.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton5.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.mod.fillCase(1, 2);
+        if(this.mod.getCase(1, 2) == 1)
+            jButton6.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(1, 2) == 2)
+            jButton6.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton6.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+         this.mod.fillCase(2, 0);
+        if(this.mod.getCase(2, 0) == 1)
+            jButton7.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(2, 0) == 2)
+            jButton7.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+         jButton7.setEnabled(false);
+        this.afficher();
+         this.finDePartie();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        this.mod.fillCase(2, 1);
+        if(this.mod.getCase(2, 1) == 1)
+            jButton8.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+
+        else if(this.mod.getCase(2, 1) == 2)
+            jButton8.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton8.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        this.mod.fillCase(2, 2);
+        if(this.mod.getCase(2, 2) == 1)
+            jButton9.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+        else if(this.mod.getCase(2, 2) == 2)
+            jButton9.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+        jButton9.setEnabled(false);
+        this.afficher();
+        this.finDePartie();
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,12 +362,8 @@ public class MorpionVue extends javax.swing.JPanel {
     private javax.swing.JButton jButton9;
     // End of variables declaration//GEN-END:variables
 
+    /*public static void main(String args[]){
+        MorpionVue Test = new MorpionVue();
+    }*/
 
-
-    public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        MorpionVue mv = new MorpionVue();
-        jf.add(mv);
-        jf.setVisible(true);
-    }
 }
