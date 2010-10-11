@@ -1,5 +1,3 @@
-package doodle;
-
 import java.util.*;
 
 import javax.swing.JFrame;
@@ -10,21 +8,21 @@ public class ModelSimon extends Observable{
 	/**
 	 * @param args
 	 */
-
+	
 	ArrayList<Integer> seqList = new ArrayList<Integer>();
 	int combientiemeCoup ;
 	int bouton ;
 	int niveau ;
 	boolean gagne = false;
-
-
+	
+	
 	public ModelSimon()
 	{
 		this.niveau = 1;
 		combientiemeCoup = 0 ;
 	}
-
-
+	
+	
 	public void initSeq(int nb)
 	{
 
@@ -41,7 +39,7 @@ public class ModelSimon extends Observable{
 		setChanged();
 		notifyObservers();
 	}
-	public void initSeq(boolean  b)
+	public void initSeq()
 	{
 
 		combientiemeCoup = 0 ;
@@ -51,39 +49,30 @@ public class ModelSimon extends Observable{
 			System.out.print(seqList.get(i));
 		}
 		System.out.println();
-                if (b){
-
-                }else{
-                    setChanged();
-                    notifyObservers();
-                    b=true;
-                }
-
-		
-		
+		setChanged();
+		notifyObservers();
 	}
-
-
-
+	
+	
+	
 	public void clearSeq()
 	{
 		this.seqList.clear();
 	}
-
+	
 	public void setBoutonClique(int boutonClique)
 	{
-                SimonVue.b=false;
 		combientiemeCoup++;
 		bouton = boutonClique;
 		this.verif(combientiemeCoup,bouton);
-
-
+		
+		
 	}
-
+	
 	public void verif(int combientieme,int bouton)
 	{
 	//	return ( this.seqList.get(combientieme -1) == bouton );
-
+		
 		if (! (this.seqList.get(combientiemeCoup -1) == bouton))
 		{
 			JFrame f = new JFrame();
@@ -107,15 +96,21 @@ public class ModelSimon extends Observable{
 		}
 
 	}
+	
+	
+	
+	public static void main(String[] args) {
 
-
-
-	/*public static void main(String[] args) {
-
+	/*	JFrame f = new JFrame();
+    	f.setBounds(300,300,400,300);
+  
 		SimonVue v = new SimonVue();
 
+    	f.add(v);
+    	f.setVisible(true);
 		v.mod.initSeq(v.mod.niveau);
-
+		
+		f.setDefaultLookAndFeelDecorated(true);
 		do
 		{
 			while ( v.mod.gagne == false)
@@ -131,15 +126,15 @@ public class ModelSimon extends Observable{
 			//v.mod.clearSeq();
 			v.mod.niveau++;
 			v.mod.initSeq();
-		}while (1==1);
-
-
-		for ( int i = 0 ; i < v.mod.seqList.size(); i++)
+		}while (1==1);*/
+		
+		
+	/*	for ( int i = 0 ; i < v.mod.seqList.size(); i++)
 		{
 			System.out.print(v.mod.seqList.get(i));
-		}
+		}*/
 
 
 	}
-        */
+
 }

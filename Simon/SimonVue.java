@@ -9,10 +9,6 @@
  * Created on 13 sept. 2010, 10:34:12
  */
 
-package doodle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -26,25 +22,30 @@ import javax.swing.*;
 
 public class SimonVue extends javax.swing.JPanel implements Observer{
     /** Creates new form SimonVue */
-    static Timer timer;
-    static SimonVue v;
+    
     ModelSimon mod ;
-    static JFrame f;
-    static boolean b;
-    //JFrame f;
+    
+    
     public SimonVue() {
     	this.mod = new ModelSimon();
     	mod.addObserver(this);
+
         initComponents();
         setVisible(true);
-        b=true;
-        //this.f = new JFrame();
-    	//this.f.setBounds(300,300,400,300);
-    	//this.f.getContentPane().add(this);
-    	//this.f.setVisible(true);
+        
+    	JFrame f = new JFrame();
+    	f.setBounds(300,300,400,300);
+  
+    	f.add(this);
+    	f.setVisible(true);
 
+    	window.gameframe.add(this);
+    	f.dispose();
+    	window.gameframe.repaint();
+
+    	
+        
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -152,7 +153,7 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
         jButton2.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg2Change.jpg"));
         jButton3.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg3.jpg"));
         jButton4.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg4.jpg"));
-
+   
     }//GEN-LAST:event_jButton2MouseClicked
 
         private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -220,35 +221,13 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
-
+    
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-        System.out.println("Update");
-        
-        if (!v.mod.gagne){
 
-                        v.mod.gagne = false;
-			//v.mod.clearSeq();
-			v.mod.niveau++;
-			v.mod.initSeq(b);
-        }else{
-
-            try {
-			Thread.sleep(1000);
-                        //sim.update(sim.getGraphics());
-                        //sim.repaint();
-                        //sim.f.repaint();
-                        //sim.f.update(sim.f.getGraphics());
-                        } catch (InterruptedException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                        }
-
-
-        }
 		for (int i = 0 ; i<mod.seqList.size();i++)
-		{
+		{	
 			if ( mod.seqList.get(i) == 0)
 			{
 		        jButton1.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg1Change.jpg"));
@@ -258,13 +237,19 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	        	repaint();
+	        	revalidate();
+	        	repaint();
 				jButton1.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg1.jpg"));
 				try {
-					Thread.sleep(100);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				repaint();
+	        	revalidate();
+	        	repaint();
 			}
 			else if ( mod.seqList.get(i) == 1)
 			{
@@ -275,13 +260,19 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 					jButton2.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg2.jpg"));
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 			}
 			else if ( mod.seqList.get(i) == 2)
 			{
@@ -292,13 +283,19 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 					jButton3.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg3.jpg"));
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 			}
 			else if ( mod.seqList.get(i) == 3)
 			{
@@ -310,61 +307,35 @@ public class SimonVue extends javax.swing.JPanel implements Observer{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 					jButton4.setIcon(new ImageIcon("/home/infoetu/khelilr/Bureau/SimonImg4.jpg"));
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					repaint();
+		        	revalidate();
+		        	repaint();
 			}
 		}
 	}
-
-        public void timerlaunch(){
-
-        }
+    
     public static void main(String [] args)
     {
-    	System.out.println("Creation frame SimonVue");
-    	f = new JFrame();
+    	/*
+    	JFrame f = new JFrame();
     	f.setBounds(300,300,400,300);
-    	v = new SimonVue();
+    	
+    	SimonVue v = new SimonVue();
     	f.add(v);
-    	f.setVisible(true);
+    	f.setVisible(true);*/
     	//SimonVue s = new SimonVue();
-        v.mod.initSeq(v.mod.niveau);
-        System.out.println("Lancement sequence SimonVue");
-        /*
-		do
-		{
-                    //sim.repaint();
-			while ( v.mod.gagne == false)
-			{
-                            //v.repaint();
-                            //v.update(v.getGraphics());
-                            //SimonVue.f.repaint();
-                               System.out.println("While SimonVue");
-                            //sim.repaint();
-				try {
-					Thread.sleep(1000);
-                                        //sim.update(sim.getGraphics());
-                                        //sim.repaint();
-                                        //sim.f.repaint();
-                                        //sim.f.update(sim.f.getGraphics());
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			v.mod.gagne = false;
-			//v.mod.clearSeq();
-			v.mod.niveau++;
-			v.mod.initSeq();
-                         System.out.println("fin boucle ");
-		}while (1==1);
-       
-    }*/
-
+    
     }
+
+
 }
