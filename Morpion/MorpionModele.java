@@ -1,8 +1,6 @@
-package doodlegames;
-
 
 public class MorpionModele {
-	private boolean joueur = true;
+	public boolean joueur = true;
 	private int[][] plateau = new int[3][3];
 
         public MorpionModele(){

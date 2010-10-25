@@ -9,9 +9,7 @@
  * Created on 4 oct. 2010, 10:24:22
  */
 
-package doodlegames;
-
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -22,27 +20,25 @@ public class MorpionVue extends javax.swing.JPanel {
     /** Creates new form OrpionVue */
     public MorpionVue() {
         initComponents();
-       // this.go();
+        setVisible(true);
+        
+    	JFrame f = new JFrame();
+    	f.setBounds(300,300,400,300);
+  
+    	f.add(this);
+    	f.setVisible(true);
+
+    	window.gameframe.add(this);
+    	f.dispose();
+    	window.gameframe.repaint();
+       
     }
 
 
 
-    /*public void jouerCoup(int x , int y , int joueur){
-        if(this.mod.getCase(x,y) == 0){
-            this.mod.fillCase(x,y);
-            return;
-        }
+   
 
-        while(this.mod.getCase(x,y) != 0)
-        {
-            if(this.mod.getCase(x,y) == 0){
-            	this.mod.fillCase(x,y);
-                return;
-            }
-        }
-    }*/
-
-    public void afficher(){
+   /* public void afficher(){
         for(int i = 0 ; i < 3 ; i++)
         {
                for(int j = 0 ; j < 3 ; j++)
@@ -62,7 +58,7 @@ public class MorpionVue extends javax.swing.JPanel {
         }
         System.out.println("\n\n");
     }
-
+*/
     public void finDePartie(){
        if((this.mod.getCase(0,0) != 0 && this.mod.getCase(0,0) == this.mod.getCase(0,1) && this.mod.getCase(0,1) == this.mod.getCase(0,2)) ||
                (this.mod.getCase(1,0) != 0 && this.mod.getCase(1,0) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(1,2)) ||
@@ -72,28 +68,56 @@ public class MorpionVue extends javax.swing.JPanel {
                (this.mod.getCase(0,2) != 0 && this.mod.getCase(0,2) == this.mod.getCase(1,2) && this.mod.getCase(1,2) == this.mod.getCase(2,2)) ||
                (this.mod.getCase(0,0) != 0 && this.mod.getCase(0,0) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(2,2)) ||
                (this.mod.getCase(0,2) != 0 && this.mod.getCase(0,2) == this.mod.getCase(1,1) && this.mod.getCase(1,1) == this.mod.getCase(2,0)))
-            System.out.println("Joueur 1 gagne!");
+       {
+		if(mod.joueur) {
+			
+			window.gameframe.remove(this);
+			window.gameframe.repaint();
+			window.gameframe.revalidate();
+			window.gameframe.validate();
+			
+			JFrame jf = new JFrame("Félicitations");
+			jf.setBounds(300,300,100,100);
+			jf.setVisible(true);
+			jf.add(new JLabel( window.j2edit.getText()+" a gagné"));
+			jf.pack();
+			jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		}else{
+			
+			window.gameframe.remove(this);
+			window.gameframe.repaint();
+			window.gameframe.revalidate();
+			window.gameframe.validate();
+			JFrame jf = new JFrame("Félicitations");
+			jf.setBounds(300,300,100,100);
+			jf.setVisible(true);
+			jf.add(new JLabel(window.j2edit.getText()+" a gagné"));
+			jf.pack();
+			jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		}
+           jButton1.setEnabled(false);
+           jButton2.setEnabled(false);
+           jButton3.setEnabled(false);
+           jButton4.setEnabled(false);
+           jButton5.setEnabled(false);
+           jButton6.setEnabled(false);
+           jButton7.setEnabled(false);
+           jButton8.setEnabled(false);
+           jButton9.setEnabled(false);
+       }
         else if (this.mod.getCase(0,0) != 0 && this.mod.getCase(0,1) != 0 && this.mod.getCase(0,2) != 0 &&
                  this.mod.getCase(1,0) != 0 && this.mod.getCase(1,1) != 0 && this.mod.getCase(1,2) != 0 &&
-                 this.mod.getCase(2,0) != 0 && this.mod.getCase(2,1) != 0 && this.mod.getCase(2,2) != 0 )
-            System.out.println("Joueur 2 gagne!");
+                 this.mod.getCase(2,0) != 0 && this.mod.getCase(2,1) != 0 && this.mod.getCase(2,2) != 0 ) {
+        	JFrame jf = new JFrame("Dommage");
+        	jf.setBounds(300,300,100,100);
+        	jf.setVisible(true);
+        	jf.add(new JLabel("Match Nul"));
+        	jf.pack();
+        	jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
     }
 
-    /*public void go(){
-        int a , b , c = 0;
-        while(this.finDePartie() == 0){
-           a = (int)(100*Math.random())%3;
-           b = (int)(100*Math.random())%3;
-           c += 1;
-           this.jouerCoup(a, b, c);
-           c %= 2;
-           this.afficher();
-        }
-        if (this.finDePartie() == 1)
-            System.out.println("Bien joué !!!");
-        else
-            System.out.println("Dommage");
-    }*/
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -117,8 +141,9 @@ public class MorpionVue extends javax.swing.JPanel {
         setBackground(new java.awt.Color(1, 1, 1));
 
         jButton1.setBackground(new java.awt.Color(1, 1, 1));
-        jButton1.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton1.setBorderPainted(false);
+        jButton1.setSize(60, 45);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -126,8 +151,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton2.setBackground(new java.awt.Color(1, 1, 1));
-        jButton2.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton2.setBorderPainted(false);
+        jButton2.setSize(60, 45);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -135,8 +161,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton3.setBackground(new java.awt.Color(1, 1, 1));
-        jButton3.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton3.setBorderPainted(false);
+        jButton3.setSize(60, 45);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -144,8 +171,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton4.setBackground(new java.awt.Color(1, 1, 1));
-        jButton4.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton4.setBorderPainted(false);
+        jButton4.setSize(60, 45);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -153,8 +181,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton5.setBackground(new java.awt.Color(1, 1, 1));
-        jButton5.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton5.setBorderPainted(false);
+        jButton5.setSize(60, 45);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -162,8 +191,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton6.setBackground(new java.awt.Color(1, 1, 1));
-        jButton6.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton6.setBorderPainted(false);
+        jButton6.setSize(60, 45);        
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -171,8 +201,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton7.setBackground(new java.awt.Color(1, 1, 1));
-        jButton7.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton7.setBorderPainted(false);
+        jButton7.setSize(60, 45);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -180,8 +211,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton8.setBackground(new java.awt.Color(1, 1, 1));
-        jButton8.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton8.setBorderPainted(false);
+        jButton8.setSize(60, 45);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -189,8 +221,9 @@ public class MorpionVue extends javax.swing.JPanel {
         });
 
         jButton9.setBackground(new java.awt.Color(1, 1, 1));
-        jButton9.setIcon(new javax.swing.ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/vide.jpg")); // NOI18N
         jButton9.setBorderPainted(false);
+        jButton9.setSize(60, 45);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -249,11 +282,11 @@ public class MorpionVue extends javax.swing.JPanel {
         this.mod.fillCase(0, 0);
         System.out.println(this.mod.getCase(0, 0));
         if(this.mod.getCase(0, 0) == 1)
-            jButton1.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton1.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(0, 0) == 2)
-            jButton1.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton1.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton1.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -261,11 +294,11 @@ public class MorpionVue extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.mod.fillCase(0, 1);
         if(this.mod.getCase(0, 1) == 1)
-            jButton2.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton2.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(0, 1) == 2)
-            jButton2.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton2.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton2.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -273,44 +306,44 @@ public class MorpionVue extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.mod.fillCase(0, 2);
         if(this.mod.getCase(0, 2) == 1)
-            jButton3.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton3.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(0, 2) == 2)
-            jButton3.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton3.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton3.setEnabled(false);
-        this.afficher();
+     //   this.afficher();
         this.finDePartie();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.mod.fillCase(1, 0);
         if(this.mod.getCase(1, 0) == 1)
-            jButton4.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton4.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(1, 0) == 2)
-            jButton4.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton4.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton4.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.mod.fillCase(1, 1);
         if(this.mod.getCase(1, 1) == 1)
-            jButton5.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton5.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(1, 1) == 2)
-            jButton5.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton5.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton5.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.mod.fillCase(1, 2);
         if(this.mod.getCase(1, 2) == 1)
-            jButton6.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton6.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(1, 2) == 2)
-            jButton6.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton6.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton6.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -318,34 +351,34 @@ public class MorpionVue extends javax.swing.JPanel {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
          this.mod.fillCase(2, 0);
         if(this.mod.getCase(2, 0) == 1)
-            jButton7.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton7.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(2, 0) == 2)
-            jButton7.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton7.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
          jButton7.setEnabled(false);
-        this.afficher();
+       // this.afficher();
          this.finDePartie();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         this.mod.fillCase(2, 1);
         if(this.mod.getCase(2, 1) == 1)
-            jButton8.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton8.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
 
         else if(this.mod.getCase(2, 1) == 2)
-            jButton8.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton8.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton8.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         this.mod.fillCase(2, 2);
         if(this.mod.getCase(2, 2) == 1)
-            jButton9.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/croix.jpg"));
+            jButton9.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/croix.jpg"));
         else if(this.mod.getCase(2, 2) == 2)
-            jButton9.setIcon(new ImageIcon("/home/infoetu/somet/DoodleGames/Morpion/Images/rond.jpg"));
+            jButton9.setIcon(new ImageIcon("/home/infoetu/khelilr/DoodleGames/Morpion/Images/rond.jpg"));
         jButton9.setEnabled(false);
-        this.afficher();
+       // this.afficher();
         this.finDePartie();
     }//GEN-LAST:event_jButton9ActionPerformed
 
