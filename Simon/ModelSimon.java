@@ -16,6 +16,7 @@ public class ModelSimon extends Observable{
 	boolean gagne = false;
 	
 	
+	
 	public ModelSimon()
 	{
 		this.niveau = 1;
@@ -78,6 +79,11 @@ public class ModelSimon extends Observable{
 			JFrame f = new JFrame();
 			f.setBounds(300,300,100,100);
 			f.add(new JLabel("Perdu"));
+			window.gameframe.remove(Animation.v);
+			window.gameframe.repaint();
+			window.gameframe.revalidate();
+			window.gameframe.validate();
+			
 			f.setVisible(true);
 			System.out.println("perdu");
 		}
@@ -100,7 +106,6 @@ public class ModelSimon extends Observable{
 	
 	
 	public static void main(String[] args) {
-
 	/*	JFrame f = new JFrame();
     	f.setBounds(300,300,400,300);
   
